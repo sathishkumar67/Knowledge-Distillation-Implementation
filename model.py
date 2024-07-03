@@ -53,7 +53,7 @@ class Distillation(L.LightningModule):
         self.teacher_model = teacher_model
 
         # adding mixup data augmentation
-        self.mixup = v2.Mixup(alpha=1.0, num_classes=args.num_class)
+        self.mixup = v2.MixUp(alpha=1.0, num_classes=args.num_class)
 
         # storing loss
         self.train_loss = []
