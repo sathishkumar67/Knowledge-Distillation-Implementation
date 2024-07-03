@@ -28,7 +28,9 @@ def main(arguments):
     
     # load the teacher model
     if os.path.exists(arguments.model_path):
-        teacher_model.load_state_dict(torch.load(arguments.model_path))
+        model = Model.load_from_checkpoint(arguments.model_path,
+                                           model=teacher_model)
+        teacher_model.load_state_dict(model.model.state_dict())
         print("Teacher model weights have been loaded")
     else:
         raise ValueError("No teacher model found")
