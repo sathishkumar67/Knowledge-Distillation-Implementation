@@ -23,16 +23,12 @@ def main(arguments):
     student_model = resnet50(pretrained=False)
     student_model.fc = nn.Linear(2048, args.num_class)
 
-    teacher_model = resnet50(pretrained=True)
+    teacher_model = resnet152(pretrained=True)
     teacher_model.fc = nn.Linear(2048, args.num_class)
     
     # load the teacher model
-    if os.path.exists(arguments.model_path):
-        teacher_base = resnet152(pretrained=False)
-        teacher_base.fc = nn.Linear(2048, 128)
-        model = Model.load_from_checkpoint(arguments.model_path,
-                                           model=teacher_base)
-        teacher_model.load_state_dict(model.model.state_dict())
+    if os.path.exists(arguments.model_path):        
+        teacher_model.load_state_dict(torch.load(arguments.model_path))
         print("Teacher model weights have been loaded")
     else:
         raise ValueError("No teacher model found")
