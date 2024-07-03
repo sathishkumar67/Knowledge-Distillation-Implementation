@@ -28,8 +28,10 @@ def main(arguments):
     
     # load the teacher model
     if os.path.exists(arguments.model_path):
+        teacher_base = resnet152(pretrained=False)
+        teacher_base.fc = nn.Linear(2048, 128)
         model = Model.load_from_checkpoint(arguments.model_path,
-                                           model=teacher_model)
+                                           model=teacher_base)
         teacher_model.load_state_dict(model.model.state_dict())
         print("Teacher model weights have been loaded")
     else:
