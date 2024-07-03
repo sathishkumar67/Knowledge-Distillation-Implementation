@@ -27,8 +27,8 @@ def main(arguments):
     teacher_model.fc = nn.Linear(2048, args.num_class)
     
     # load the teacher model
-    if os.path.exists(args.model_path):
-        teacher_model.load_state_dict(torch.load(args.model_path))
+    if os.path.exists(arguments.model_path):
+        teacher_model.load_state_dict(torch.load(arguments.model_path))
         print("Teacher model weights have been loaded")
     else:
         raise ValueError("No teacher model found")
