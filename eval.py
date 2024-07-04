@@ -5,7 +5,7 @@ from model import Distillation
 # instantize the args
 args = Args()
 
-def main(arguments):
+def main():
     checkpoints_names = ["teacher.pt", "student.pt", "distilled_student.pt"]
     for ckpt_name in checkpoints_names:
         hf_hub_download(repo_id='pt-sk/knowledge_distillation', filename=f'{ckpt_name}', local_dir="/checkpoints")
