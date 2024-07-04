@@ -48,6 +48,10 @@ def main():
     # calculate the accuracy, precision, recall and f1 score for all student_model, teacher_model, distilled_student model
     metrics = {}
 
+    # model names
+    model_names = ["student", "teacher", "distilled_student"]
+
+    count = 0
     for model in [student_model, teacher_model, distilled_student_model]:
         model.eval()
         with torch.no_grad():
@@ -69,12 +73,14 @@ def main():
         recall = recall_score(all_labels, all_preds, average='macro')
         f1 = f1_score(all_labels, all_preds, average='macro')
 
-        metrics[f"{model}"] = {
+        metrics[names[count]] = {
             'Accuracy': accuracy,
             'Precision': precision,
             'Recall': recall,
             'F1 Score': f1
         }
+
+        count+=1
     
     # convert the metrics dictionary to a pandas dataframe
     df = pd.DataFrame.from_dict(metrics, orient='index')
