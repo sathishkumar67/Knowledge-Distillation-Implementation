@@ -29,5 +29,7 @@ from PIL import Image
 from typing import Optional
 from dataclasses import dataclass
 from utils import transform
+import argparse as ap
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 from huggingface_hub import hf_hub_url, hf_hub_download, login, HfApi
