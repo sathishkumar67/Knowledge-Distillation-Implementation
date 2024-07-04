@@ -73,7 +73,7 @@ def main():
         recall = recall_score(all_labels, all_preds, average='macro')
         f1 = f1_score(all_labels, all_preds, average='macro')
 
-        metrics[names[count]] = {
+        metrics[model_names[count]] = {
             'Accuracy': accuracy,
             'Precision': precision,
             'Recall': recall,
