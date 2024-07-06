@@ -49,7 +49,7 @@ def main():
     metrics = {}
 
     # model names
-    model_names = ["student", "teacher", "distilled_student"]
+    model_names = ["teacher", "student", "distilled_student"]
 
     count = 0
     for model in [student_model, teacher_model, distilled_student_model]:
