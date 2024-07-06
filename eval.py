@@ -18,7 +18,7 @@ def main():
     # move model to GPU if available
     student_model.to(args.device)
     # load the student model
-    student_model.load_state_dict(torch.load("/checkpoints/student.pt"))
+    student_model.load_state_dict(torch.load("/checkpoints/student_without_mixup.pt"))
     print("Student model weights have been loaded")
 
     # trained teacher model
@@ -27,7 +27,7 @@ def main():
     # move model to GPU if available
     teacher_model.to(args.device)
     # load the teacher model
-    teacher_model.load_state_dict(torch.load("/checkpoints/teacher.pt"))
+    teacher_model.load_state_dict(torch.load("/checkpoints/teacher_mixup.pt"))
     print("Teacher model weights have been loaded")
 
     # trained distilled student model
@@ -36,7 +36,7 @@ def main():
     # move model to GPU if available
     distilled_student_model.to(args.device)
     # load the distilled student model
-    distilled_student_model.load_state_dict(torch.load("/checkpoints/distilled_student.pt"))
+    distilled_student_model.load_state_dict(torch.load("/checkpoints/distilled_student_teachermixup.pt"))
     print("Distilled student model weights have been loaded")
 
     # prepare dataset
