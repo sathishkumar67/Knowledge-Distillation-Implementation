@@ -77,7 +77,7 @@ class Distillation(L.LightningModule):
             teacher_output = self.teacher_model(batch)
 
         loss += F.kl_div(F.log_softmax(student_output / args.temperature, dim=1), F.softmax(teacher_output / args.temperature, dim=1), reduction='sum') * (args.temperature**2) / batch.shape[0]
-        self.train_loss.append(loss)
+        self.train_loss.append(loss.item())
         self.log("Train_KL_Loss", loss, prog_bar=True)
         return loss
     
@@ -95,6 +95,6 @@ class Distillation(L.LightningModule):
         batch, label = self.mixup(batch, label)
         out = self.student_model(batch)
         loss = F.cross_entropy(out, label)
-        self.val_loss.append(loss)
+        self.val_loss.append(loss.item())
         self.log("Val_Loss", loss, prog_bar=True)
         return loss
